@@ -3,24 +3,30 @@
   become: yes
   become_user: root
   gather_facts: no
+  vars:
+   server_port: 9091
 
   tasks:
     - name: "Install The Package"
       apt:
         name: nginx
-        state: present 
+        state: present
+      notify: "Stop service"
 
-    - name: "Stop The Service"
-      service: 
-        name: nginx
-        state: stopped        
-      
     - name: "Update configuration"  
       template:
         src: port.j2
         dest: /etc/nginx/sites-enabled/default
+      notify: "config change" 
 
-    - name: "Start The Service"
-      service: 
+
+  handlers: 
+    - name: "Stop service"
+      service:
         name: nginx
-        state: started   
+        state: stopped
+    
+    - name: "config change"
+      service:
+        name: nginx
+        state: reloaded
