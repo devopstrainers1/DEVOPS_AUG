@@ -1,3 +1,0 @@
-[web]
-web1 ansible_host=172.31.78.37 ansible_connection=ssh ansible_ssh_user=shekhar2096gmai ansible_ssh_pass='96gmai0A@tdog6' ansible_port=42006
-web2 ansible_host=172.31.79.36 ansible_connection=ssh ansible_ssh_user=ajaycshotmail ansible_ssh_pass='otmail0A@pclve' ansible_port=42006
