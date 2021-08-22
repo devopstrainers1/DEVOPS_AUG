@@ -4,19 +4,10 @@
       apt:
         name: nginx
         state: present
-
-    - name: "Stop The Service"
-      service:
-        name: nginx
-        state: stopped
+      notify: "Stop service"
 
     - name: "Update configuration"
       template:
         src: port.j2
         dest: /etc/nginx/sites-enabled/default
-
-    - name: "Start The Service"
-      service:
-        name: nginx
-        state: started
-
+      notify: "config change"
